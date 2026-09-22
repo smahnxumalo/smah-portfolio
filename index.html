@@ -3,22 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Simangele Nxumalo — Product Builder · Founder</title>
+<title>Smah Nxumalo — Product Builder · Founder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
     :root {
-        --bg: #0B0B0A;
-        --text: #F4F0E8;
-        --text-secondary: #A9A49A;
-        --accent: #C9A24D;
-        --border: #292824;
+        --bg: #FAF9F5;
+        --text: #181817;
+        --text-secondary: #6B6862;
+        --text-tertiary: #99958D;
+        --accent: #B89445;
+        --plum: #4A3048;
+        --border: #E8E5DD;
+        --border-soft: #F0EDE6;
+        --border-hover: #D5D1C7;
+        --plum-soft: rgba(74, 48, 72, 0.08);
+        --gold-soft: rgba(184, 148, 69, 0.12);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+    }
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -28,86 +37,332 @@
         font-size: 15px;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
     }
 
-    .page {
+    /* ===== STICKY TOP NAV ===== */
+    .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(250, 249, 245, 0.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border-soft);
+    }
+
+    .topnav-inner {
         max-width: 720px;
         margin: 0 auto;
-        padding: 80px 32px 120px;
+        padding: 18px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
     }
 
-    /* ===== HEADER ===== */
-    header {
-        margin-bottom: 72px;
-    }
-
-    .name {
+    .topnav-brand {
         font-family: 'Fraunces', serif;
-        font-size: 38px;
+        font-size: 15px;
         font-weight: 500;
-        letter-spacing: -0.02em;
-        color: var(--accent);
-        line-height: 1.1;
-        margin-bottom: 6px;
-    }
-
-    .nickname {
-        font-family: 'Fraunces', serif;
-        font-size: 20px;
-        font-weight: 400;
-        color: var(--text);
+        color: var(--plum);
         letter-spacing: -0.01em;
-        margin-bottom: 24px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        flex-shrink: 0;
     }
 
-    .role {
-        font-size: 14px;
-        color: var(--text-secondary);
-        margin-bottom: 4px;
-        letter-spacing: 0.01em;
+    .topnav-brand:hover { color: var(--accent); }
+
+    .topnav-right {
+        display: flex;
+        align-items: center;
+        gap: 28px;
     }
 
-    .role-line {
-        font-size: 14px;
-        color: var(--text-secondary);
-        margin-bottom: 24px;
-        letter-spacing: 0.01em;
-    }
+    .topnav-links { display: flex; gap: 24px; }
 
-    .mission-intro {
-        font-family: 'Fraunces', serif;
-        font-size: 20px;
-        font-weight: 400;
-        color: var(--text);
-        letter-spacing: -0.01em;
-        line-height: 1.5;
-        margin-bottom: 32px;
-        max-width: 540px;
-    }
-
-    .divider {
-        height: 1px;
-        background: var(--accent);
-        opacity: 0.35;
-        margin-bottom: 56px;
-        width: 64px;
-    }
-
-    /* ===== SECTIONS ===== */
-    section {
-        margin-bottom: 56px;
-    }
-
-    .section-label {
+    .topnav-link {
         font-size: 11px;
         font-weight: 600;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--text-secondary);
-        margin-bottom: 22px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative;
+        padding-bottom: 3px;
+        white-space: nowrap;
     }
 
-    /* ===== BUILDING / PROJECTS ===== */
+    .topnav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 1px;
+        background: var(--accent);
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .topnav-link:hover { color: var(--plum); }
+    .topnav-link:hover::after { width: 100%; }
+
+    /* ===== SOCIAL ICONS IN NAV ===== */
+    .topnav-social {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-left: 24px;
+        border-left: 1px solid var(--border);
+    }
+
+    .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .social-icon:hover {
+        color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        display: block;
+    }
+
+    .social-icon::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+        background: var(--plum);
+        color: var(--bg);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-icon:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== PAGE ===== */
+    .page {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 88px 32px 120px;
+    }
+
+    /* ===== HERO ===== */
+    .hero { margin-bottom: 100px; }
+
+    .hero > * {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: heroFade 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero > *:nth-child(2) { animation-delay: 0.25s; }
+    .hero > *:nth-child(3) { animation-delay: 0.55s; }
+    .hero > *:nth-child(4) { animation-delay: 0.75s; }
+    .hero > *:nth-child(5) { animation-delay: 0.95s; }
+
+    @keyframes heroFade {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .hero-eyebrow .spark {
+        color: var(--plum);
+        font-size: 13px;
+        display: inline-block;
+        animation: sparkFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes sparkFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        50% { transform: translateY(-3px) rotate(15deg); opacity: 0.7; }
+    }
+
+    .hero-statement {
+        font-family: 'Fraunces', serif;
+        font-size: 30px;
+        font-weight: 400;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        line-height: 1.35;
+        margin-bottom: 40px;
+        max-width: 580px;
+    }
+
+    .hero-statement .line { display: block; }
+    .hero-statement .gold {
+        color: var(--accent);
+        font-style: italic;
+    }
+
+    .hero-smiley {
+        font-family: 'Fraunces', serif;
+        font-size: 22px;
+        color: var(--plum);
+        opacity: 0.7;
+        margin-bottom: 32px;
+        letter-spacing: 0.02em;
+        transition: transform 0.2s ease;
+        display: inline-block;
+        will-change: transform;
+    }
+
+    .hero-meta {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 32px;
+    }
+
+    .hero-meta .dot {
+        color: var(--accent);
+        margin: 0 8px;
+        opacity: 0.6;
+    }
+
+    .hero-say-hi {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--plum);
+        text-decoration: none;
+        transition: gap 0.4s ease, color 0.3s ease;
+    }
+
+    .hero-say-hi:hover {
+        gap: 16px;
+        color: var(--accent);
+    }
+
+    .hero-say-hi .arrow {
+        transition: transform 0.4s ease;
+        display: inline-block;
+    }
+
+    .hero-say-hi:hover .arrow { transform: translateY(4px); }
+
+    /* ===== SCROLL-TRIGGERED REVEAL ===== */
+    .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+        margin-bottom: 96px;
+        scroll-margin-top: 80px;
+    }
+
+    .section-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text);
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-label .spark {
+        color: var(--accent);
+        font-size: 12px;
+        display: inline-block;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible .section-label .spark {
+        transform: rotate(180deg);
+    }
+
+    /* ===== ABOUT ===== */
+    .about-text {
+        font-size: 16px;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 22px;
+        max-width: 580px;
+    }
+
+    .about-text:last-of-type { margin-bottom: 0; }
+
+    .about-text .gold { color: var(--accent); font-weight: 500; }
+    .about-text .plum { color: var(--plum); font-weight: 500; }
+
+    .tools-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-tertiary);
+        margin-top: 48px;
+        margin-bottom: 14px;
+    }
+
+    .tools-line {
+        font-size: 13.5px;
+        color: var(--text-secondary);
+        letter-spacing: 0.01em;
+        line-height: 2;
+    }
+
+    .tools-line .sep {
+        color: var(--border);
+        margin: 0 8px;
+    }
+
+    /* ===== PROJECTS ===== */
     .build-list {
         display: flex;
         flex-direction: column;
@@ -119,42 +374,55 @@
         align-items: baseline;
         justify-content: space-between;
         gap: 24px;
-        padding: 16px 0;
+        padding: 22px 0;
         border-bottom: 1px solid var(--border);
-        transition: all 0.2s ease;
+        transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.4s ease;
+        position: relative;
     }
 
-    .build-item:last-child {
-        border-bottom: none;
-    }
+    .build-item:last-child { border-bottom: none; }
 
     .build-item:hover {
-        padding-left: 4px;
+        padding-left: 10px;
+        border-color: var(--border-hover);
     }
 
-    .build-info {
-        flex: 1;
-        min-width: 0;
+    .build-item::before {
+        content: "✦";
+        position: absolute;
+        left: -18px;
+        top: 26px;
+        color: var(--accent);
+        font-size: 12px;
+        opacity: 0;
+        transform: translateX(-8px) rotate(-20deg);
+        transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    .build-item:hover::before {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+
+    .build-info { flex: 1; min-width: 0; }
 
     .build-name {
         font-family: 'Fraunces', serif;
-        font-size: 19px;
+        font-size: 20px;
         font-weight: 500;
         color: var(--text);
         letter-spacing: -0.01em;
-        margin-bottom: 3px;
-        transition: color 0.2s ease;
+        margin-bottom: 5px;
+        transition: color 0.3s ease;
     }
 
-    .build-item:hover .build-name {
-        color: var(--accent);
-    }
+    .build-item:hover .build-name { color: var(--plum); }
 
     .build-desc {
         font-size: 13.5px;
         color: var(--text-secondary);
-        line-height: 1.5;
+        line-height: 1.55;
     }
 
     .build-link {
@@ -162,204 +430,556 @@
         color: var(--text-secondary);
         text-decoration: none;
         white-space: nowrap;
-        transition: color 0.2s ease;
+        transition: color 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         flex-shrink: 0;
         align-self: center;
     }
 
-    .build-link:hover {
+    .build-item:hover .build-link {
         color: var(--accent);
+        transform: translateX(4px);
     }
 
-    /* ===== JOURNEY ===== */
-    .journey-text {
-        font-size: 15.5px;
+    /* ===== EXPERIENCE ===== */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+        padding: 24px 0;
+        border-bottom: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: baseline;
+        transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.4s ease;
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+    .exp-item:hover {
+        padding-left: 10px;
+        border-color: var(--border-hover);
+    }
+
+    .exp-role {
+        font-family: 'Fraunces', serif;
+        font-size: 17px;
+        font-weight: 500;
         color: var(--text);
-        line-height: 1.8;
-        max-width: 560px;
-        margin-bottom: 44px;
+        letter-spacing: -0.01em;
+        margin-bottom: 5px;
     }
 
-    .journey-text p {
-        margin-bottom: 20px;
-    }
-
-    .journey-text p:last-child {
-        margin-bottom: 0;
-    }
-
-    .journey-text .closing-lines {
+    .exp-org {
+        font-size: 13px;
         color: var(--text-secondary);
-        font-style: italic;
-        line-height: 2;
+        margin-bottom: 6px;
     }
 
-    .journey-text .closing-lines span {
-        display: block;
-    }
-
-    /* Journey chain — visual, non-interactive */
-    .journey-chain {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        padding: 8px 0 8px 4px;
-    }
-
-    .journey-step {
-        font-size: 11.5px;
-        font-weight: 600;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
+    .exp-desc {
+        font-size: 13.5px;
         color: var(--text-secondary);
-        padding: 8px 0;
-        transition: color 0.2s ease;
+        line-height: 1.6;
+        max-width: 460px;
     }
 
-    .journey-step.highlight {
-        color: var(--text);
-    }
-
-    .journey-step.final {
-        color: var(--accent);
-    }
-
-    .journey-arrow {
+    .exp-years {
         font-size: 12px;
-        color: var(--border);
-        padding-left: 2px;
-        line-height: 1;
+        color: var(--text-tertiary);
+        letter-spacing: 0.06em;
+        white-space: nowrap;
     }
 
-    /* ===== ABOUT ===== */
-    .about-text {
-        font-size: 15px;
+    /* ===== WRITING ===== */
+    .writing-intro {
+        font-family: 'Fraunces', serif;
+        font-size: 17px;
+        font-style: italic;
         color: var(--text-secondary);
-        line-height: 1.75;
-        margin-bottom: 18px;
-        max-width: 560px;
+        margin-bottom: 36px;
+        line-height: 1.5;
     }
 
-    .about-text:last-child {
-        margin-bottom: 0;
+    .writing-list { display: flex; flex-direction: column; gap: 0; }
+
+    .writing-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 26px 0;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        color: var(--text);
+        transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.4s ease;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .writing-item:last-child { border-bottom: none; }
+    .writing-item:hover {
+        padding-left: 10px;
+        border-color: var(--border-hover);
+    }
+
+    .writing-info { flex: 1; min-width: 0; }
+
+    .writing-title {
+        font-family: 'Fraunces', serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--text);
+        letter-spacing: -0.01em;
+        margin-bottom: 5px;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .writing-title .spark {
+        color: var(--gold-soft);
+        font-size: 13px;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                    color 0.4s ease;
+        display: inline-block;
+    }
+
+    .writing-item:hover .writing-title { color: var(--plum); }
+
+    .writing-item:hover .writing-title .spark {
+        transform: rotate(90deg) scale(1.15);
+        color: var(--accent);
+    }
+
+    .writing-sub {
+        font-size: 13.5px;
+        color: var(--text-secondary);
+        line-height: 1.55;
+    }
+
+    .writing-action {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-tertiary);
+        white-space: nowrap;
+        flex-shrink: 0;
+        align-self: center;
+        transition: color 0.3s ease, gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .writing-item:hover .writing-action {
+        color: var(--accent);
+        gap: 14px;
+    }
+
+    /* ===== ARTICLE PAGES ===== */
+    .article-page {
+        display: none;
+        margin-bottom: 96px;
+        scroll-margin-top: 80px;
+    }
+
+    .article-page.active {
+        display: block;
+        opacity: 1;
+        transform: none;
+    }
+
+    .article-page .article-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-tertiary);
+        text-decoration: none;
+        margin-bottom: 40px;
+        transition: color 0.3s ease, gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: inherit;
+    }
+
+    .article-page .article-back:hover {
+        color: var(--accent);
+        gap: 14px;
+    }
+
+    .article-page .article-back .arrow {
+        display: inline-block;
+        transition: transform 0.4s ease;
+    }
+
+    .article-page .article-back:hover .arrow {
+        transform: translateX(-4px);
+    }
+
+    .article-meta {
+        font-size: 12px;
+        color: var(--text-tertiary);
+        letter-spacing: 0.04em;
+        margin-bottom: 12px;
+    }
+
+    .article-title {
+        font-family: 'Fraunces', serif;
+        font-size: 28px;
+        font-weight: 500;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+
+    .article-subtitle {
+        font-family: 'Fraunces', serif;
+        font-size: 17px;
+        font-style: italic;
+        color: var(--text-secondary);
+        margin-bottom: 40px;
+        line-height: 1.5;
+    }
+
+    .article-body {
+        font-size: 16px;
+        color: var(--text-secondary);
+        line-height: 1.85;
+        max-width: 620px;
+    }
+
+    .article-body p {
+        margin-bottom: 24px;
+    }
+
+    .article-body p:last-child { margin-bottom: 0; }
+
+    .article-body h2 {
+        font-family: 'Fraunces', serif;
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--text);
+        letter-spacing: -0.01em;
+        margin-top: 48px;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    .article-body h3 {
+        font-family: 'Fraunces', serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--text);
+        letter-spacing: -0.01em;
+        margin-top: 36px;
+        margin-bottom: 16px;
+        line-height: 1.4;
+    }
+
+    .article-body .gold { color: var(--accent); font-weight: 500; }
+    .article-body .plum { color: var(--plum); font-weight: 500; }
+
+    .article-body blockquote {
+        border-left: 2px solid var(--accent);
+        padding-left: 24px;
+        margin: 32px 0;
+        font-family: 'Fraunces', serif;
+        font-size: 18px;
+        font-style: italic;
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    .article-body ul, .article-body ol {
+        margin-bottom: 24px;
+        padding-left: 24px;
+    }
+
+    .article-body li {
+        margin-bottom: 10px;
+        line-height: 1.75;
     }
 
     /* ===== CONNECT ===== */
-    .connect-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
+    .connect-list { display: flex; flex-direction: column; gap: 0; }
 
     .connect-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px 0;
+        padding: 18px 0;
         border-bottom: 1px solid var(--border);
         text-decoration: none;
         color: var(--text);
-        font-size: 14.5px;
-        transition: all 0.2s ease;
+        font-size: 15px;
+        transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.4s ease;
     }
 
-    .connect-item:last-child {
-        border-bottom: none;
-    }
-
+    .connect-item:last-child { border-bottom: none; }
     .connect-item:hover {
-        padding-left: 4px;
+        padding-left: 10px;
+        border-color: var(--border-hover);
     }
 
     .connect-item .label {
         color: var(--text);
-        transition: color 0.2s ease;
+        transition: color 0.3s ease;
     }
 
-    .connect-item:hover .label {
-        color: var(--accent);
-    }
+    .connect-item:hover .label { color: var(--plum); }
 
     .connect-item .arrow {
-        color: var(--text-secondary);
+        color: var(--text-tertiary);
         font-size: 13px;
-        transition: all 0.2s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .connect-item:hover .arrow {
         color: var(--accent);
-        transform: translateX(3px);
+        transform: translateX(4px);
     }
 
-    /* ===== CLOSING STATEMENT ===== */
+    /* ===== CLOSING ===== */
     .closing-statement {
-        margin-top: 88px;
-        padding-top: 44px;
+        margin-top: 104px;
+        padding-top: 52px;
         border-top: 1px solid var(--border);
+        text-align: center;
+        position: relative;
+        isolation: isolate;
+    }
+
+    .closing-statement::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.6);
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle,
+            rgba(184, 148, 69, 0.14) 0%,
+            rgba(184, 148, 69, 0.04) 40%,
+            transparent 70%);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .closing-statement.visible::before {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .closing-statement .closing-line {
         font-family: 'Fraunces', serif;
-        font-size: 26px;
+        font-size: 30px;
         font-weight: 400;
         color: var(--accent);
         letter-spacing: -0.015em;
         line-height: 1.4;
     }
 
+    .closing-statement .closing-spark {
+        font-size: 14px;
+        color: var(--plum);
+        opacity: 0.8;
+        margin-top: 20px;
+        display: block;
+        animation: sparkFloat 5s ease-in-out infinite;
+    }
+
     /* ===== FOOTER ===== */
     footer {
-        margin-top: 64px;
+        margin-top: 52px;
         font-size: 12px;
-        color: var(--text-secondary);
+        color: var(--text-tertiary);
         letter-spacing: 0.02em;
+        text-align: center;
+    }
+
+    /* ===== CONFETTI CANVAS ===== */
+    #confettiCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
     }
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+        .topnav-inner { padding: 14px 22px; gap: 14px; }
+        .topnav-links { gap: 14px; }
+        .topnav-link { font-size: 10px; letter-spacing: 0.1em; }
+        .topnav-social { gap: 10px; padding-left: 14px; }
+        .social-icon { width: 24px; height: 24px; }
+        .social-icon svg { width: 15px; height: 15px; }
+        .social-icon::after { display: none; }
+    }
+
     @media (max-width: 600px) {
+        .topnav-inner {
+            padding: 12px 18px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .topnav-brand { font-size: 14px; }
+        .topnav-right {
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .topnav-links { gap: 10px; }
+        .topnav-link { font-size: 9px; letter-spacing: 0.08em; }
+        .topnav-social {
+            padding-left: 10px;
+            gap: 8px;
+        }
+        .social-icon { width: 22px; height: 22px; }
+        .social-icon svg { width: 14px; height: 14px; }
         .page { padding: 56px 22px 90px; }
-        .name { font-size: 30px; }
-        .nickname { font-size: 18px; }
-        .mission-intro { font-size: 18px; }
-        .build-item { flex-wrap: wrap; gap: 6px; }
+        .hero-statement { font-size: 24px; }
+        .hero { margin-bottom: 72px; }
+        section { margin-bottom: 72px; }
+        .build-item { flex-wrap: wrap; gap: 6px; padding: 18px 0; }
+        .build-item::before { display: none; }
         .build-link { align-self: flex-start; }
         .build-name { font-size: 17px; }
-        header { margin-bottom: 56px; }
-        section { margin-bottom: 44px; }
-        .journey-text { font-size: 14.5px; }
-        .closing-statement .closing-line { font-size: 22px; }
+        .exp-item { grid-template-columns: 1fr; gap: 4px; }
+        .exp-years { align-self: flex-start; }
+        .writing-item { flex-wrap: wrap; gap: 8px; }
+        .writing-action { align-self: flex-start; }
+        .writing-title { font-size: 18px; }
+        .article-title { font-size: 22px; }
+        .article-body { font-size: 15px; }
+        .closing-statement .closing-line { font-size: 24px; }
+        .closing-statement::before { width: 220px; height: 220px; }
+        #confettiCanvas { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+        .hero > * { opacity: 1; transform: none; }
+        .reveal { opacity: 1; transform: none; }
+        #confettiCanvas { display: none; }
     }
 </style>
 </head>
 <body>
 
-    <div class="page">
+    <canvas id="confettiCanvas"></canvas>
 
-        <!-- ===== HEADER ===== -->
-        <header>
-            <h1 class="name">SIMANGELE NXUMALO</h1>
-            <div class="nickname">Smah</div>
+    <nav class="topnav">
+        <div class="topnav-inner">
+            <a class="topnav-brand" href="#top">Smah Nxumalo</a>
 
-            <div class="role">Product Builder · Founder</div>
-            <div class="role-line">BCompt Accounting Science Student, UNISA</div>
+            <div class="topnav-right">
+                <div class="topnav-links">
+                    <a class="topnav-link" href="#about">About</a>
+                    <a class="topnav-link" href="#projects">Projects</a>
+                    <a class="topnav-link" href="#experience">Experience</a>
+                    <a class="topnav-link" href="#writing">Writing</a>
+                </div>
 
-            <div class="mission-intro">
-                Building at the intersection of<br>
-                culture, finance &amp; technology.
+                <div class="topnav-social">
+                    <a class="social-icon" href="https://www.linkedin.com/in/smah-nxumalo/" target="_blank" rel="noopener" data-tooltip="LinkedIn" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+
+                    <a class="social-icon" href="https://github.com/smahnxumalo" target="_blank" rel="noopener" data-tooltip="GitHub" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+
+                    <a class="social-icon" href="mailto:smanxumalo1@gmail.com" data-tooltip="Email" aria-label="Email">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M1.5 4.5h21a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75h-21a.75.75 0 01-.75-.75V5.25A.75.75 0 011.5 4.5zm.75 2.06v11.44h19.5V6.56l-9.75 6.14L2.25 6.56zM3.6 6h16.8l-8.4 5.29L3.6 6z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page" id="top">
+
+        <header class="hero">
+            <div class="hero-eyebrow">
+                <span class="spark">✦</span> Hey, I'm Smah
             </div>
 
-            <div class="divider"></div>
+            <div class="hero-statement">
+                <span class="line">I build things.</span>
+                <span class="line">I have big ideas.</span>
+                <span class="line">I like making them <span class="gold">real</span>.</span>
+            </div>
+
+            <div class="hero-smiley" id="heroSmiley">˘ᴗ˘</div>
+
+            <div class="hero-meta">
+                Product Builder<span class="dot">·</span>Founder<span class="dot">·</span>Creative Thinker<br>
+                BCompt Accounting Science Student, UNISA<br>
+                Building at the intersection of culture, finance &amp; technology.
+            </div>
+
+            <a class="hero-say-hi" id="sayHiLink" href="#about">
+                Say hi <span class="arrow">↓</span>
+            </a>
         </header>
 
-        <!-- ===== BUILDING ===== -->
-        <section>
-            <div class="section-label">Building</div>
+        <section id="about" class="reveal">
+            <div class="section-label"><span class="spark">✦</span> About</div>
+
+            <p class="about-text">
+                I'm curious about people, technology, culture, business
+                and the <span class="plum">weird little connections</span> between them.
+            </p>
+            <p class="about-text">
+                My path hasn't been conventional. I started with business,
+                experimented across different industries, and gradually moved
+                into technology and product.
+            </p>
+            <p class="about-text">
+                Today I'm studying Accounting Science while building products
+                across <span class="gold">culture, finance, technology and AI</span>.
+            </p>
+
+            <div class="tools-label">Things I've Worked With</div>
+            <div class="tools-line">
+                React<span class="sep">·</span>JavaScript<span class="sep">·</span>HTML/CSS<span class="sep">·</span>Supabase<span class="sep">·</span>PostgreSQL<span class="sep">·</span>Python<span class="sep">·</span>SQL<span class="sep">·</span>Git<span class="sep">·</span>Figma<span class="sep">·</span>Power BI
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <div class="section-label"><span class="spark">✦</span> Projects</div>
+
             <div class="build-list">
                 <div class="build-item">
                     <div class="build-info">
                         <div class="build-name">OwnCulture</div>
-                        <div class="build-desc">Talent agency infrastructure for the machine age.</div>
+                        <div class="build-desc">The CAA of the Machine Age. Talent agency infrastructure for the AI era.</div>
                     </div>
                     <a class="build-link" href="https://ownculture.vercel.app/" target="_blank" rel="noopener">Visit ↗</a>
                 </div>
@@ -367,23 +987,17 @@
                 <div class="build-item">
                     <div class="build-info">
                         <div class="build-name">UniSekela</div>
-                        <div class="build-desc">Student collaboration platform.</div>
+                        <div class="build-desc">Study circles for serious students.</div>
                     </div>
                     <a class="build-link" href="https://unisekela-web-core.vercel.app/" target="_blank" rel="noopener">Visit ↗</a>
                 </div>
-            </div>
-        </section>
 
-        <!-- ===== PROJECTS ===== -->
-        <section>
-            <div class="section-label">Projects</div>
-            <div class="build-list">
                 <div class="build-item">
                     <div class="build-info">
-                        <div class="build-name">UniSekela AI</div>
-                        <div class="build-desc">AI academic operating system for students.</div>
+                        <div class="build-name">TribalHive</div>
+                        <div class="build-desc">Community intelligence platform connecting African clan roots and regional talent.</div>
                     </div>
-                    <a class="build-link" href="https://unisekela-ai.vercel.app/" target="_blank" rel="noopener">Visit ↗</a>
+                    <a class="build-link" href="https://tribalhive.co.za/" target="_blank" rel="noopener">Visit ↗</a>
                 </div>
 
                 <div class="build-item">
@@ -393,68 +1007,737 @@
                     </div>
                     <a class="build-link" href="https://wordwalk-lime.vercel.app/" target="_blank" rel="noopener">Visit ↗</a>
                 </div>
+
+                <div class="build-item">
+                    <div class="build-info">
+                        <div class="build-name">UniSekela AI</div>
+                        <div class="build-desc">AI academic operating system for students.</div>
+                    </div>
+                    <a class="build-link" href="https://unisekela-ai.vercel.app/" target="_blank" rel="noopener">Visit ↗</a>
+                </div>
             </div>
         </section>
 
-        <!-- ===== JOURNEY ===== -->
-        <section>
-            <div class="section-label">Journey</div>
+        <section id="experience" class="reveal">
+            <div class="section-label"><span class="spark">✦</span> Experience</div>
 
-            <div class="journey-text">
-                <p>I didn't start by knowing how to build software.</p>
-                <p>I started with a dream.</p>
-                <p>
-                    Selling second-hand clothes on the street. Trying different ideas.
-                    Building businesses. Failing. Starting again.
-                </p>
-                <p>
-                    Along the way, I taught myself how to build with technology
-                    and began turning ideas into products.
-                </p>
-                <p>
-                    Today I'm studying Accounting Science while building at the
-                    intersection of culture, finance and technology.
-                </p>
-                <p class="closing-lines">
-                    <span>I'm still learning.</span>
-                    <span>Still building.</span>
-                    <span>And I don't plan to stop.</span>
-                </p>
-            </div>
+            <div class="exp-list">
+                <div class="exp-item">
+                    <div>
+                        <div class="exp-role">Founder &amp; Product Builder</div>
+                        <div class="exp-org">Independent</div>
+                        <div class="exp-desc">Building and experimenting with products across AI, education, culture, technology and business.</div>
+                    </div>
+                    <div class="exp-years">2024 — Present</div>
+                </div>
 
-            <div class="journey-chain">
-                <div class="journey-step highlight">Second-hand clothes</div>
-                <div class="journey-arrow">↓</div>
-                <div class="journey-step highlight">Business</div>
-                <div class="journey-arrow">↓</div>
-                <div class="journey-step">Failure</div>
-                <div class="journey-arrow">↓</div>
-                <div class="journey-step highlight">Learning</div>
-                <div class="journey-arrow">↓</div>
-                <div class="journey-step highlight">Technology</div>
-                <div class="journey-arrow">↓</div>
-                <div class="journey-step highlight">Products</div>
-                <div class="journey-arrow">↓</div>
-                <div class="journey-step final">Building</div>
+                <div class="exp-item">
+                    <div>
+                        <div class="exp-role">Retail Assistant</div>
+                        <div class="exp-org">Ackermans</div>
+                    </div>
+                    <div class="exp-years">2023 — 2024</div>
+                </div>
+
+                <div class="exp-item">
+                    <div>
+                        <div class="exp-role">Sales Consultant</div>
+                        <div class="exp-org">Metropolitan</div>
+                    </div>
+                    <div class="exp-years">2018 — 2019</div>
+                </div>
+
+                <div class="exp-item">
+                    <div>
+                        <div class="exp-role">Co-Founder</div>
+                        <div class="exp-org">Beewoke</div>
+                    </div>
+                    <div class="exp-years">2015</div>
+                </div>
             </div>
         </section>
 
-        <!-- ===== ABOUT ===== -->
-        <section>
-            <div class="section-label">About</div>
-            <p class="about-text">
-                I'm an Accounting Science student who builds products, explores ideas,
-                and learns by turning them into real things.
+        <!-- ===== WRITING INDEX ===== -->
+        <section id="writing" class="reveal">
+            <div class="section-label"><span class="spark">✦</span> Writing</div>
+
+            <p class="writing-intro">
+                Things I've been thinking about.
             </p>
-            <p class="about-text">
-                My interests sit across culture, finance, technology, product, and the
-                systems that connect people and opportunity.
-            </p>
+
+            <div class="writing-list">
+
+                <div class="writing-item" data-article="packaging">
+                    <div class="writing-info">
+                        <div class="writing-title">
+                            <span class="spark">✦</span> Packaging Partners
+                        </div>
+                        <div class="writing-sub">The bridge between offline and on-chain</div>
+                    </div>
+                    <div class="writing-action">Read →</div>
+                </div>
+
+                <div class="writing-item" data-article="america">
+                    <div class="writing-info">
+                        <div class="writing-title">
+                            <span class="spark">✦</span> America
+                        </div>
+                        <div class="writing-sub">Like a Couple Married for 100 Years</div>
+                    </div>
+                    <div class="writing-action">Read →</div>
+                </div>
+
+                <div class="writing-item" data-article="grace">
+                    <div class="writing-info">
+                        <div class="writing-title">
+                            <span class="spark">✦</span> When Grace Covers All Sins
+                        </div>
+                        <div class="writing-sub">Do we escape law and justice?</div>
+                    </div>
+                    <div class="writing-action">Read →</div>
+                </div>
+
+                <div class="writing-item" data-article="revival">
+                    <div class="writing-info">
+                        <div class="writing-title">
+                            <span class="spark">✦</span> Revival
+                        </div>
+                        <div class="writing-sub">Influencers as Modern-Day Missionaries</div>
+                    </div>
+                    <div class="writing-action">Read →</div>
+                </div>
+
+            </div>
         </section>
 
-        <!-- ===== CONNECT ===== -->
-        <section>
-            <div class="section-label">Connect</div>
+        <!-- ===== ARTICLE: PACKAGING PARTNERS ===== -->
+        <article id="packaging" class="article-page">
+            <button class="article-back" data-back>
+                <span class="arrow">←</span> Back to Writing
+            </button>
+            <div class="article-meta">Smah Nxumalo · Sep 22, 2026</div>
+            <h1 class="article-title">Packaging Partners: The Bridge Between Offline and On-Chain</h1>
+            <p class="article-subtitle">A media platform where talent, fans, and packaging partners build together.</p>
+
+            <div class="article-body">
+                <p>For decades, the American entertainment industry ran on a model most people never had a name for: <span class="gold">packaging</span>.</p>
+
+                <p>Agencies like Creative Artists Agency and Endeavor's WME didn't just represent talent. They assembled ecosystems around it, bringing together actors, writers, directors, producers, brands, financiers, and distributors to turn individual talent into projects that could travel.</p>
+
+                <p>The engine behind that efficiency was the operator: the agency or label standing between talent and the market, making sure the work got made, found buyers, and reached audiences.</p>
+
+                <p>And that structure created a divide that still shapes how talent thinks about its career today:</p>
+
+                <p><span class="plum">dependent talent and independent talent.</span></p>
+
+                <p>Dependent talent had leverage precisely because they weren't alone.</p>
+
+                <p>Being signed to an agency or label could mean instant access to lawyers, accountants, marketers, investors, studios, stylists, writers, producers, and distribution networks. Talent could concentrate on becoming excellent at their craft while someone else handled much of the machinery around it.</p>
+
+                <p>But convenience came with a cost.</p>
+
+                <p>Talent that never had to learn the business side of the business could struggle to negotiate for itself. And when the agency or label controlled the relationship with buyers, distributors, and sometimes even the audience, the same infrastructure that created opportunity could also create dependency.</p>
+
+                <p>Support could become control.</p>
+
+                <p>Independent talent solved part of that problem but inherited another.</p>
+
+                <p>From the beginning, an independent artist has to think about the audience. And today, platforms like YouTube, TikTok, Spotify, and Substack have made building that audience more accessible than ever.</p>
+
+                <p>But <span class="gold">exposure isn't infrastructure.</span></p>
+
+                <p>An artist can have millions of followers and still have no lawyer reviewing a contract, no accountant managing the business, no producer assembling the right collaborators, no buyer negotiating a deal, and no operator turning an audience into sustainable economic power.</p>
+
+                <p>Fans already fill pieces of this role informally.</p>
+
+                <p>They discover talent, champion it, fund it, distribute it, create culture around it, and sometimes become the reason a project exists at all.</p>
+
+                <p>But the internet still largely treats fans as an audience.</p>
+
+                <p>That's the gap.</p>
+
+                <p>The problem isn't that independent talent lacks fans, or that dependent talent lacks resources.</p>
+
+                <p>It's that we haven't built a structure where <span class="gold">talent can have the infrastructure of the agency model without surrendering the freedom that made independence valuable in the first place.</span></p>
+
+                <p>That's the platform I keep coming back to:</p>
+
+                <p><span class="plum">talent that can be resourced like an agency artist and remain free like an independent one.</span></p>
+
+                <h2>What would that require?</h2>
+
+                <p><span class="gold">First, the platform has to function as an operator.</span></p>
+
+                <p>Social platforms already sit on enormous amounts of undeveloped talent. But creator funds and partner programs generally reward attention, views, engagement, subscribers, rather than doing the deeper work of developing talent.</p>
+
+                <p>A platform built around talent should help turn potential into actual work: assembling teams, finding opportunities, managing projects, negotiating relationships, and connecting talent with the infrastructure needed to execute.</p>
+
+                <p><span class="gold">Second, fans have to become participants.</span></p>
+
+                <p>A fan base isn't simply a collection of followers.</p>
+
+                <p>It can be demand, distribution, funding, feedback, reputation, community, and commercial power.</p>
+
+                <p>The platform should make those relationships visible and useful without reducing fans to another advertising metric.</p>
+
+                <p>Imagine a fan community that can support a project, signal demand, participate in its growth, and benefit from the ecosystem it helps create.</p>
+
+                <p>Not just an audience.</p>
+
+                <p>A participant.</p>
+
+                <p><span class="gold">Third, the infrastructure has to extend beyond the platform.</span></p>
+
+                <p>Talent development doesn't happen in isolation. It moves through universities, governments, NGOs, private companies, cultural institutions, investors, and communities.</p>
+
+                <p>Resources are constantly being allocated toward developing people and projects. But the journey from <span class="plum">resource to contribution to outcome</span> is often difficult to see.</p>
+
+                <p>Who funded it? Who contributed? Who was selected? What was delivered? Who owns the resulting work? Who benefited?</p>
+
+                <p>An open data layer could make those relationships more transparent.</p>
+
+                <p>This is where on-chain infrastructure becomes interesting, not because everything needs to become crypto, but because certain rights, contributions, agreements, ownership records, and transactions can benefit from being persistent, verifiable, and portable.</p>
+
+                <p>The blockchain should disappear into the infrastructure.</p>
+
+                <p>The human relationship should remain visible.</p>
+
+                <p><span class="gold">Finally, talent needs access to the real economy.</span></p>
+
+                <p>Investors. Buyers. Retailers. TV. Radio. Advertising. Studios. Venues. Stadiums. Billboards. Distribution networks. Physical spaces.</p>
+
+                <p>Those relationships have historically been concentrated inside agencies, labels, studios, and other institutions with the networks to make things happen.</p>
+
+                <p>The opportunity is not to destroy those institutions.</p>
+
+                <p>It is to make more of that infrastructure accessible.</p>
+
+                <p>An open layer could allow talent to discover partners, assemble teams, establish rights, negotiate agreements, and move from an online community into the physical economy, without first having to surrender ownership to an intermediary.</p>
+
+                <p>And that's why I don't think talent needs to choose between <span class="plum">dependent and independent</span> anymore.</p>
+
+                <p>It needs both.</p>
+
+                <p>The resources of dependence. The freedom of independence. The audience of social media. The infrastructure of an agency. The transparency of an open network. The reach of the internet. The reality of the physical world.</p>
+
+                <p>Most creative careers now begin digitally long before they reach a stage, studio, boardroom, store, stadium, or billboard.</p>
+
+                <p>So perhaps the next generation of talent infrastructure shouldn't ask:</p>
+
+                <p><span class="gold">"Are you signed or independent?"</span></p>
+
+                <p>It should ask:</p>
+
+                <p><span class="gold">"What are you building, who is building it with you, and what infrastructure do you need to make it real?"</span></p>
+
+                <p>That is the bridge I keep imagining, between talent and opportunity, fans and participation, online communities and the physical economy, and eventually, between the offline world and the on-chain one.</p>
+            </div>
+        </article>
+
+        <!-- ===== ARTICLE: AMERICA ===== -->
+        <article id="america" class="article-page">
+            <button class="article-back" data-back>
+                <span class="arrow">←</span> Back to Writing
+            </button>
+            <div class="article-meta">Smah Nxumalo · Aug 30, 2025</div>
+            <h1 class="article-title">America: Like a Couple Married for 100 Years</h1>
+            <p class="article-subtitle">AI won't save Hollywood or America until they confront their past. The future belongs to Africa's youth.</p>
+
+            <div class="article-body">
+                <p>America is like a couple who has been married for a hundred years.</p>
+
+                <p>Agnes and Justin celebrated their hundredth anniversary, and of course, Justin made a toast, the same story he had told for the past hundred years. By now, Agnes and Justin know each other so well that nothing is new; their conversations and stories have been recycled time and time again. These days they mostly complain, reminisce about the good old days, and fall into long silences.</p>
+
+                <p>Agnes knows Justin's every trick, yet she still pretends to laugh and act surprised. They have endured trials, achieved great things, and, even in their old age, still hold onto love, respect, and admiration. But time has taken its toll. With failing health, they are desperate for renewal.</p>
+
+                <p>Every family carries its history in its body, and this one has never once sat down to name what it did wrong.</p>
+
+                <p>One day, sitting on their blue couch watching their favorite news channel, they hear about a new protein shake, a miracle product promising to sharpen memory, strengthen the body, improve speech, and rekindle relationships. They beam with excitement. For the first time in a long while, the future looks promising.</p>
+
+                <p>Their joy is interrupted when their two children, Sam and Kate, walk in.</p>
+
+                <p>The mood shifts instantly.</p>
+
+                <p>Agnes and Justin were never good parents. They often complained that their children were lazy and not smart, making them feel more like charity cases than loved family. Yes, they provided money for schools, clothes, and food, but love, respect, and care were missing. Sam and Kate never felt heard.</p>
+
+                <p>Moments later, laughter fills the house as their five grandchildren rush in: Blue, James, Wiz, Poppy, and Chicago.</p>
+
+                <p>Unlike with their children, Agnes and Justin are determined to be better grandparents. They invest their time, money, and love. They listen, encourage, and nurture with patience.</p>
+
+                <p>It is their second chance.</p>
+
+                <p>Deep down, Agnes and Justin know they were not good parents. But they will never admit it or apologize.</p>
+
+                <p>That refusal doesn't disappear. It just gets quieter, passed down as an unspoken debt.</p>
+
+                <p>Instead of confronting it, they try to make up for it by being great grandparents.</p>
+
+                <p>As the children chatter, the TV in the background flashes again with the protein shake commercial.</p>
+
+                <p>Excited, Blue and Chicago shout:</p>
+
+                <p>"Mom, Dad, look! Our favorite protein shake!"</p>
+
+                <p>Sam explains how the shake has helped his kids excel. A-students in science and programming, thriving in sports and art, developing leadership skills, and making friends.</p>
+
+                <p>Wiz, carrying a handmade gift, adds:</p>
+
+                <p>"Guess what, Grandpa, we built this for you, to help with your back pain!"</p>
+
+                <p>The grandparents beam with pride, hug their grandchildren, and realize the future is bright.</p>
+
+                <p>But notice what the shake actually does.</p>
+
+                <p>Agnes and Justin drink it hoping it will undo a hundred years, bring back the memory, the strength, the voice they've lost.</p>
+
+                <p>It won't.</p>
+
+                <p>Renewal doesn't work by pretending the past didn't happen.</p>
+
+                <p>And the grandchildren are not the grandparents' medicine.</p>
+
+                <p>They are their own generation.</p>
+
+                <p>They grow stronger from the opportunities around them, sharper, more capable, more themselves, because they're still becoming.</p>
+
+                <p>That's us.</p>
+
+                <p>Africa is the grandchildren in this story.</p>
+
+                <p>Our parents carried the consequences of what earlier generations did to the continent. And now we are the children coming up in a world with different tools, different possibilities, and a different relationship with power.</p>
+
+                <p>For over a hundred years, America has been like Agnes and Justin, telling its story across movies, politics, music, advertising, technology, fashion, food, and sports.</p>
+
+                <p>We have all been Americanized and Europeanized, especially in Africa.</p>
+
+                <p>The American Dream was real, and in many ways, still is.</p>
+
+                <p>But there is a shift happening.</p>
+
+                <p>Young people across Africa, the world's youngest continent, are writing their own story. The African Union commonly uses 15 to 35 as its youth bracket, while the UN uses 15 to 24 for statistical purposes. Either way, the demographic reality is enormous: Africa's young population is growing rapidly, and the UN describes this as both a major opportunity and a major challenge for the continent's future.</p>
+
+                <p>And something else is changing.</p>
+
+                <p>Young Africans are increasingly confident in their skin, voices, languages, cultures, businesses, art, technology, and ideas.</p>
+
+                <p>They are not waiting for permission to become interesting.</p>
+
+                <p>They are already creating.</p>
+
+                <p>They are building companies, making music, designing products, writing stories, developing technology, starting communities, and connecting across borders.</p>
+
+                <p>They are ready to tell the world who they are, in their own words.</p>
+
+                <p>The scars of colonization remain.</p>
+
+                <p>Our parents may never receive apologies from Western powers. That debt doesn't close itself simply because a new generation arrives.</p>
+
+                <p>Yet America has a chance to do something different with this generation, by listening, partnering, and amplifying rather than dominating.</p>
+
+                <p>And it's worth separating the different ways America and other Western institutions have interacted with Africa.</p>
+
+                <p>Business, at least in principle, operates through exchange. A company builds something, sells it, hires people, invests capital, and expects a return. That relationship can be unequal, exploitative, or mutually beneficial, but the transaction is visible.</p>
+
+                <p>The aid and NGO world is more complicated.</p>
+
+                <p>Governments and private companies have funded organizations whose stated purpose is to help African communities, and much of that work has done real good. There are people inside these organizations doing difficult, invisible work every day.</p>
+
+                <p>But good intentions don't automatically produce good outcomes.</p>
+
+                <p>Some interventions can create dependency, distort local incentives, displace local institutions, or leave outsiders permanently defining problems they don't ultimately have to live with.</p>
+
+                <p>And that's what makes the conversation uncomfortable:</p>
+
+                <p><span class="gold">What if a system built around helping people can sometimes become a system that needs people to remain in need?</span></p>
+
+                <p>That's a much harder question than simply asking whether America has helped Africa.</p>
+
+                <p>There is a conversation happening now, particularly on platforms like X, about whether some of the structures built to help have themselves become part of the problem.</p>
+
+                <p>Elon Musk has made broad criticisms of government-funded NGOs and the relationship between governments, nonprofits, and public money. Those are claims that deserve evidence rather than a viral post. The broader issue, however, is worth examining seriously: after decades of aid, investment, development programs, and good intentions, who gets to define what "help" actually looks like?</p>
+
+                <p>And there is an important distinction here.</p>
+
+                <p>Africa does not need to pretend that every American company, NGO, investor, institution, or individual has caused harm. That would be as simplistic as pretending every intervention has worked.</p>
+
+                <p>The deeper question is whether the relationship itself is ready to change.</p>
+
+                <p>Maybe Africa doesn't always need another institution arriving to save it.</p>
+
+                <p>Maybe it needs more institutions that trust Africans to build, own, govern, and solve.</p>
+
+                <p>America is racing to win the AI race, determined to remain the world's leading technological and economic power.</p>
+
+                <p>But a shake doesn't revive what refuses to change.</p>
+
+                <p>If the mindset stays the same, dominate first, help second, apologize never, winning the race could simply mean exporting the same old pattern faster.</p>
+
+                <p>AI cannot apologize for history.</p>
+
+                <p>Blockchain cannot repair a broken relationship.</p>
+
+                <p>Technology can give people new tools, but it cannot decide what those tools should mean.</p>
+
+                <p>The real renewal belongs to the people still becoming.</p>
+
+                <p>And right now, Africa has one of the world's largest and fastest-growing young populations. The UN and African institutions increasingly frame this demographic shift as an opportunity for innovation, economic transformation, and a potential demographic dividend, provided young people have the education, jobs, infrastructure, and agency to turn that potential into reality.</p>
+
+                <p>For a century, advertising and storytelling were dominated by America.</p>
+
+                <p>But perhaps the next chapter isn't about America becoming less American.</p>
+
+                <p>Perhaps it's about Africa becoming fully itself.</p>
+
+                <p>A new chapter is beginning, one written by Africa's youth.</p>
+
+                <p>Bold enough to dream.</p>
+
+                <p>Bold enough to build.</p>
+
+                <p>Bold enough to own the future.</p>
+
+                <p>And perhaps, for the first time, the rest of the world will have to sit on the couch and listen to our story.</p>
+            </div>
+        </article>
+
+        <!-- ===== ARTICLE: WHEN GRACE COVERS ALL SINS ===== -->
+        <article id="grace" class="article-page">
+            <button class="article-back" data-back>
+                <span class="arrow">←</span> Back to Writing
+            </button>
+            <div class="article-meta">Smah Nxumalo · Aug 22, 2025</div>
+            <h1 class="article-title">When Grace Covers All Sins. Do We Escape Law and Justice?</h1>
+            <p class="article-subtitle">On corruption, complicity, and the silence of the church.</p>
+
+            <div class="article-body">
+                <p>Let's talk about politicians, their business friends, influencers, artists, club owners, the church, non-profits, and communities who sometimes seem to have discovered a strange way of making questionable things look respectable.</p>
+
+                <p>Many of us, including politicians and business leaders, are shaped by religious beliefs. Yet what we see in leadership and society can still be deeply troubling.</p>
+
+                <h2>Crime and Corruption Are Thriving</h2>
+
+                <p>Every year, companies are awarded government tenders worth millions. Sometimes audits and investigations reveal incomplete work, inflated costs, irregular procurement, or money that cannot be properly accounted for.</p>
+
+                <p>Communities protest. The media raises questions. Politicians make statements.</p>
+
+                <p>And then, too often, the story disappears from public attention.</p>
+
+                <p>The problem isn't funding businesses or supporting entrepreneurs. It's what happens when legitimate businesses, charities, or other structures are allegedly used as vehicles for corruption, money laundering, drug trafficking, exploitation, or other crimes.</p>
+
+                <p>And when the money starts flowing, success can become its own disguise.</p>
+
+                <p>Artists, business owners, club operators, influencers, and other public figures can display the rewards of wealth on social media, yachts, luxury brands, international trips, while the public rarely sees the systems behind the money.</p>
+
+                <p>Sometimes the wealth is legitimate.</p>
+
+                <p>Sometimes questions remain unanswered.</p>
+
+                <p>And sometimes the people asking those questions are treated as the problem.</p>
+
+                <h2>Communities and the Church</h2>
+
+                <p>Communities can watch the spectacle in awe.</p>
+
+                <p>"God when?"</p>
+
+                <p>Mothers admire the blessings. Young people admire the lifestyle. Followers celebrate the success.</p>
+
+                <p>But when did prosperity become proof of righteousness?</p>
+
+                <p>A person can have money, influence, a large following, and a seat in the front row of a church, and still be accountable to the law.</p>
+
+                <p>This is where the church has a difficult responsibility.</p>
+
+                <p>Some politicians and wealthy businesspeople remain deeply committed to their faith, paying tithes and offerings faithfully. Churches can receive significant donations from wealthy individuals and organizations.</p>
+
+                <p>But faith should never become a substitute for accountability.</p>
+
+                <p>And pastors are not exempt from that responsibility either.</p>
+
+                <p>If a donor's money comes from questionable sources, does giving it to the church make it clean?</p>
+
+                <p>If a politician funds a church, does the donation make the politician righteous?</p>
+
+                <p>If a successful person is celebrated publicly, are we allowed to ask how the success was achieved?</p>
+
+                <p>Grace is not the same thing as innocence.</p>
+
+                <p>Forgiveness is not the same thing as the absence of consequences.</p>
+
+                <p>And faith does not require us to abandon justice.</p>
+
+                <p>So who will stand for truth when everyone benefits from staying quiet?</p>
+
+                <h2>A Global Problem</h2>
+
+                <p>This isn't only an African problem.</p>
+
+                <p>Crime, corruption, money laundering, exploitation, and financial misconduct exist across countries and industries. The mechanisms change, but the underlying temptation is remarkably consistent:</p>
+
+                <p><span class="gold">money can create distance between an action and its consequences.</span></p>
+
+                <p>The person who steals doesn't always look like a criminal.</p>
+
+                <p>The money doesn't always arrive in a suitcase.</p>
+
+                <p>The institution doesn't always look corrupt.</p>
+
+                <p>Sometimes it arrives as a contract.</p>
+
+                <p>Sometimes as an investment.</p>
+
+                <p>Sometimes as a donation.</p>
+
+                <p>Sometimes as a sponsorship.</p>
+
+                <p>Sometimes as a luxury lifestyle that nobody thinks to question.</p>
+
+                <p>And perhaps that's what makes financial crime so difficult to confront.</p>
+
+                <p>It can hide inside things that otherwise look legitimate.</p>
+
+                <p>We are all dependent on systems we don't fully see, governments, banks, companies, churches, charities, investment structures, and communities.</p>
+
+                <p>That makes accountability even more important.</p>
+
+                <p>I believe in grace.</p>
+
+                <p>I believe people can change.</p>
+
+                <p>I believe forgiveness matters.</p>
+
+                <p>But I also believe that justice matters.</p>
+
+                <p>We are all at the mercy and grace of God, but...</p>
+
+                <p><span class="gold">Do we escape law and justice?</span></p>
+
+                <p>(Okay, full disclosure, my conspiracy-theory brain wants to take this one step further and say the entire global money system is basically one big laundering operation. I have zero evidence for that. I just think about it sometimes at 2am.)</p>
+
+                <p>Please still hire me.</p>
+
+                <p>I'm pursuing my CFA and CIMA, and I'd love nothing more than to build a career as a woman in finance.</p>
+
+                <p>I promise I know what a trial balance is.</p>
+            </div>
+        </article>
+
+        <!-- ===== ARTICLE: REVIVAL ===== -->
+        <article id="revival" class="article-page">
+            <button class="article-back" data-back>
+                <span class="arrow">←</span> Back to Writing
+            </button>
+            <div class="article-meta">Smah Nxumalo · Sep 23, 2025</div>
+            <h1 class="article-title">Revival: Influencers as Modern-Day Missionaries</h1>
+            <p class="article-subtitle">How Africa's digital generation can lead a spiritual transformation of social media.</p>
+
+            <div class="article-body">
+                <h2>The Influence Crisis</h2>
+
+                <p>Social media has created a new kind of celebrity.</p>
+
+                <p>African content creators are increasingly becoming powerful voices for brands, culture, entertainment, and public conversation. But alongside the rise of influencer culture is another reality: young people are growing up inside an economy of constant comparison.</p>
+
+                <p>The endless scroll of curated perfection can breed envy, insecurity, loneliness, and damaged self-esteem. We see lifestyles we cannot afford, bodies we don't have, relationships that appear perfect, and success that seems to happen overnight.</p>
+
+                <p>For some young people, the gap between the life they have and the life they see online becomes painful.</p>
+
+                <p>We've become so obsessed with showcasing ourselves that perhaps we've forgotten to ask what our influence is actually for.</p>
+
+                <p>This made me think:</p>
+
+                <p><span class="gold">What if we reimagined influence itself?</span></p>
+
+                <h2>Learning from History's Influencers</h2>
+
+                <p>When I think about the missionaries and evangelists who travelled across Africa in the nineteenth and twentieth centuries, I see an uncomfortable but interesting parallel with today's influencers.</p>
+
+                <p>They understood that influence was never only about what someone said.</p>
+
+                <p>Missionary movements carried ideas, languages, education, institutions, economic relationships, cultural practices, and entire worldviews across borders.</p>
+
+                <p>Their history is complicated. Missionary work was sometimes intertwined with colonial power, cultural suppression, and the imposition of foreign values. Those consequences shouldn't be romanticized.</p>
+
+                <p>But there is something worth learning from their conviction and ability to communicate a worldview.</p>
+
+                <p><span class="gold">What if this time the cultural transformation comes from within Africa, by Africans, for Africans, and for the world?</span></p>
+
+                <p>Not to impose.</p>
+
+                <p>To share.</p>
+
+                <p>Not to erase culture.</p>
+
+                <p>To create from it.</p>
+
+                <p>Not to make Africans consumers of someone else's worldview.</p>
+
+                <p>To give Africans the confidence to contribute their own.</p>
+
+                <h2>Africa's Moment</h2>
+
+                <p>Something is happening across Africa.</p>
+
+                <p>Christianity has a rapidly growing presence across the continent, and the demographic centre of global Christianity is increasingly shifting toward the Global South.</p>
+
+                <p>That creates an extraordinary opportunity for young African Christians.</p>
+
+                <p>We have songs to write. Hymns to create. Films to make. Businesses to build. Products to design. Stories to tell. Ways of worshipping that emerge from our own languages, cultures, rhythms, histories, and experiences.</p>
+
+                <p>Our faith doesn't have to look like an imported template to be authentic.</p>
+
+                <p>And our creativity doesn't have to be separated from our faith to be valuable.</p>
+
+                <p>What if our influence could become an expression of both?</p>
+
+                <h2>The Vision: Modern-Day Missionaries</h2>
+
+                <p>I believe we could reimagine the African influencer as a <span class="gold">Modern-Day Missionary, an MDM.</span></p>
+
+                <p>Not as a title that every influencer must accept.</p>
+
+                <p>As a new model of influence.</p>
+
+                <p>And this isn't simply a rebrand.</p>
+
+                <p>It's a different way of thinking about what influence is for.</p>
+
+                <h3>Verification and Accountability</h3>
+
+                <p>Imagine a system where people who choose to take on this role can build credibility through churches, colleges, religious societies, and other trusted communities.</p>
+
+                <p>A shared credentialing system could allow different institutions to vouch for someone's participation, character, work, or education without requiring one central institution to control the entire network.</p>
+
+                <p>Technology could eventually make those credentials portable and transparent.</p>
+
+                <p>Perhaps even on-chain.</p>
+
+                <p>The goal wouldn't be to create another gatekeeper.</p>
+
+                <p>It would be to create <span class="gold">trust without centralizing authority.</span></p>
+
+                <h3>Purpose-Driven Content</h3>
+
+                <p>Influence shouldn't be measured only in followers, likes, views, or aesthetics.</p>
+
+                <p>An MDM would be concerned with the fruits of the Spirit:</p>
+
+                <p><span class="plum">love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control.</span></p>
+
+                <p>But authenticity matters too.</p>
+
+                <p>Faith doesn't require pretending that life is perfect.</p>
+
+                <p>An MDM could show the struggle as well as the victory, the uncertainty as well as the confidence, the ordinary life behind the polished image.</p>
+
+                <p>The goal isn't manufactured perfection.</p>
+
+                <p>It's <span class="gold">truthful influence.</span></p>
+
+                <h3>Cultural and Economic Ownership</h3>
+
+                <p>This is where spiritual revival meets economic revival.</p>
+
+                <p>Just as historical missionary movements carried culture alongside their message, modern African influencers have the ability to carry African products, businesses, innovations, music, fashion, technology, food, art, and ideas to the world.</p>
+
+                <p>But there's a difference.</p>
+
+                <p>We don't have to become distributors for everyone else's culture.</p>
+
+                <p>We can become creators and owners of our own.</p>
+
+                <p>An African influencer shouldn't only be valuable because an international brand wants access to their audience.</p>
+
+                <p>They can build the brand themselves. They can own the product. They can create the company. They can employ people. They can export the culture. They can build wealth.</p>
+
+                <h2>Building Our Own Tables</h2>
+
+                <p>For too long, African influencers have often been positioned as content creators for other people's brands, telling other people's stories and selling other people's products.</p>
+
+                <p>We've become very good at promoting international brands while our own stories, products, and culture can remain undervalued.</p>
+
+                <p>But what happens when we stop asking:</p>
+
+                <p><span class="gold">"Who will invite us to the table?"</span></p>
+
+                <p>and start asking:</p>
+
+                <p><span class="gold">"What are we building at our own table?"</span></p>
+
+                <p>That's the revival I'm interested in.</p>
+
+                <p>Not only spiritual.</p>
+
+                <p><span class="plum">Cultural. Economic. Creative.</span></p>
+
+                <p>A generation that knows God, knows itself, builds its own businesses, owns its intellectual property, creates jobs, tells its own stories, and shares African excellence with the world.</p>
+
+                <p>We're living through difficult times. Unemployment is high, opportunities can feel scarce, and many young people feel disconnected from purpose.</p>
+
+                <p>But perhaps that is precisely why influence matters.</p>
+
+                <p>When people are searching for meaning, the voices they encounter online can either deepen the emptiness or point toward something greater.</p>
+
+                <h2>The Revival We Need</h2>
+
+                <p>This isn't simply about cleaning up social media.</p>
+
+                <p>It's about asking what social media could become.</p>
+
+                <p>Could digital platforms help address unemployment by connecting young people to opportunities?</p>
+
+                <p>Could creators use their influence to normalize conversations about mental health and purpose?</p>
+
+                <p>Could Christian entrepreneurs build businesses rooted in integrity?</p>
+
+                <p>Could African creators export not only entertainment, but wisdom?</p>
+
+                <p>Could our platforms become places where faith, culture, creativity, commerce, and community reinforce one another rather than compete?</p>
+
+                <p>The outpouring of the Holy Spirit doesn't happen in isolation.</p>
+
+                <p>It happens through surrendered people who are willing to use what they've been given for something bigger than themselves.</p>
+
+                <p>And today, one of the things many young people have been given is <span class="gold">influence.</span></p>
+
+                <h2>A Prayer and a Challenge</h2>
+
+                <p>I'm praying for a generation of young African Christians who choose purpose over popularity, service over self-promotion, and spiritual fruit over social media metrics.</p>
+
+                <p>I'm praying for creators who aren't afraid to be excellent and faithful at the same time.</p>
+
+                <p>For entrepreneurs who build with integrity.</p>
+
+                <p>For artists who create without losing themselves.</p>
+
+                <p>For leaders who understand that influence is stewardship.</p>
+
+                <p>The question isn't whether Africa has influential voices.</p>
+
+                <p>We do.</p>
+
+                <p>The question is:</p>
+
+                <p><span class="gold">Will we use those voices to point people toward ourselves or toward our Creator?</span></p>
+
+                <p>The world is watching.</p>
+
+                <p>The church is waiting.</p>
+
+                <p>The opportunity is here.</p>
+
+                <p><span class="gold">Are you ready to become a Modern-Day Missionary?</span></p>
+
+                <p>And perhaps there are already African influencers living this way, whether or not they would ever use that title.</p>
+
+                <p>Who are they?</p>
+
+                <p>And what would happen if we built the systems to support them?</p>
+            </div>
+        </article>
+
+        <section class="reveal">
+            <div class="section-label"><span class="spark">✦</span> Connect</div>
             <div class="connect-list">
                 <a class="connect-item" href="https://www.linkedin.com/in/smah-nxumalo/" target="_blank" rel="noopener">
                     <span class="label">LinkedIn</span>
@@ -471,22 +1754,277 @@
             </div>
         </section>
 
-        <!-- ===== CLOSING STATEMENT ===== -->
-        <div class="closing-statement">
+        <div class="closing-statement reveal">
             <div class="closing-line">
                 Building for humanity.
             </div>
+            <span class="closing-spark">✦</span>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <footer>
-            © <span id="year"></span> Simangele Nxumalo. Built quietly.
+            © <span id="year"></span> Smah Nxumalo
         </footer>
 
     </div>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        /* ===== Article navigation ===== */
+        const writingItems = document.querySelectorAll('.writing-item');
+        const articlePages = document.querySelectorAll('.article-page');
+
+        function showArticle(id) {
+            articlePages.forEach(a => a.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+            }
+        }
+
+        writingItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = item.getAttribute('data-article');
+                if (id) {
+                    showArticle(id);
+                    history.pushState(null, null, '#' + id);
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-back]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                articlePages.forEach(a => a.classList.remove('active'));
+                document.getElementById('writing').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.pushState(null, null, '#writing');
+            });
+        });
+
+        function handleHash() {
+            const hash = window.location.hash;
+            if (hash) {
+                const id = hash.substring(1);
+                const targetArticle = document.getElementById(id);
+                if (targetArticle && targetArticle.classList.contains('article-page')) {
+                    showArticle(id);
+                }
+            }
+        }
+        window.addEventListener('load', handleHash);
+        window.addEventListener('hashchange', handleHash);
+
+        /* ===== Scroll-triggered reveal ===== */
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -60px 0px'
+        });
+        reveals.forEach(el => observer.observe(el));
+
+        /* ===== Smiley ===== */
+        const smiley = document.getElementById('heroSmiley');
+        if (smiley && window.matchMedia('(hover: hover)').matches) {
+            let currentX = 0, currentY = 0;
+            let targetX = 0, targetY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                const rect = smiley.getBoundingClientRect();
+                const smileyCenterX = rect.left + rect.width / 2;
+                const smileyCenterY = rect.top + rect.height / 2;
+
+                const dx = e.clientX - smileyCenterX;
+                const dy = e.clientY - smileyCenterY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                const maxDist = 500;
+                if (dist < maxDist) {
+                    targetX = (dx / maxDist) * 3;
+                    targetY = (dy / maxDist) * 2;
+                } else {
+                    targetX = 0;
+                    targetY = 0;
+                }
+            });
+
+            function tick() {
+                currentX += (targetX - currentX) * 0.08;
+                currentY += (targetY - currentY) * 0.08;
+                smiley.style.transform =
+                    `translate(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px)`;
+                requestAnimationFrame(tick);
+            }
+            tick();
+        }
+
+        /* ===== Confetti ===== */
+        (function() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            const sayHi = document.getElementById('sayHiLink');
+
+            if (!canvas || !sayHi) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (window.innerWidth <= 600) return;
+
+            let particles = [];
+            let animationId = null;
+            let canvasW = 0, canvasH = 0;
+
+            function resize() {
+                canvasW = window.innerWidth;
+                canvasH = window.innerHeight;
+                canvas.width = canvasW * window.devicePixelRatio || canvasW;
+                canvas.height = canvasH * window.devicePixelRatio || canvasH;
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const GOLD = ['#B89445', '#D4B66A', '#8F7135'];
+
+            function spawnConfetti(originX, originY) {
+                const count = 12 + Math.floor(Math.random() * 5);
+
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = 40 + Math.random() * 50;
+                    const targetX = originX + Math.cos(angle) * radius;
+                    const targetY = originY + Math.sin(angle) * radius;
+
+                    const size = 4 + Math.random() * 4;
+                    const color = GOLD[Math.floor(Math.random() * GOLD.length)];
+                    const rotation = (Math.random() - 0.5) * 2 * (Math.PI * 2);
+                    const rotationSpeed = (Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 360);
+                    const lifetime = 900 + Math.random() * 200;
+
+                    particles.push({
+                        x: originX,
+                        y: originY,
+                        startX: originX,
+                        startY: originY,
+                        targetX: targetX,
+                        targetY: targetY,
+                        size: size,
+                        color: color,
+                        rotation: rotation,
+                        rotationSpeed: rotationSpeed * (Math.PI / 180),
+                        lifetime: lifetime,
+                        startTime: performance.now(),
+                        shape: Math.random() > 0.5 ? 'square' : 'spark',
+                    });
+                }
+
+                if (!animationId) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+
+            function animate(now) {
+                ctx.clearRect(0, 0, canvasW, canvasH);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    const elapsed = now - p.startTime;
+                    const progress = Math.min(1, elapsed / p.lifetime);
+
+                    if (progress >= 1) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const x = p.startX + (p.targetX - p.startX) * easeOut;
+                    const y = p.startY + (p.targetY - p.startY) * easeOut;
+
+                    let alpha = 1;
+                    if (progress > 0.7) {
+                        alpha = 1 - (progress - 0.7) / 0.3;
+                    }
+
+                    const rot = p.rotation + p.rotationSpeed * elapsed;
+
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, alpha);
+                    ctx.translate(x, y);
+                    ctx.rotate(rot);
+                    ctx.fillStyle = p.color;
+
+                    if (p.shape === 'square') {
+                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    } else {
+                        ctx.beginPath();
+                        const s = p.size * 0.6;
+                        for (let j = 0; j < 4; j++) {
+                            const a = (j * Math.PI) / 2;
+                            ctx.lineTo(Math.cos(a) * s, Math.sin(a) * s);
+                            ctx.lineTo(Math.cos(a + Math.PI / 4) * s * 0.4, Math.sin(a + Math.PI / 4) * s * 0.4);
+                        }
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+
+                    ctx.restore();
+                }
+
+                if (particles.length > 0) {
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    animationId = null;
+                    ctx.clearRect(0, 0, canvasW, canvasH);
+                }
+            }
+
+            sayHi.addEventListener('click', function(e) {
+                const rect = sayHi.getBoundingClientRect();
+                const clickX = e.clientX || (rect.left + rect.width / 2);
+                const clickY = e.clientY || (rect.top + rect.height / 2);
+
+                const glow = document.createElement('div');
+                glow.style.cssText = `
+                    position: fixed;
+                    left: ${clickX}px;
+                    top: ${clickY}px;
+                    width: 12px;
+                    height: 12px;
+                    background: radial-gradient(circle, rgba(184,148,69,0.9) 0%, rgba(184,148,69,0.3) 50%, transparent 70%);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    pointer-events: none;
+                    z-index: 10000;
+                    animation: glowPulse 0.35s ease-out forwards;
+                `;
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes glowPulse {
+                        0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                        100% { opacity: 0; transform: translate(-50%, -50%) scale(3); }
+                    }
+                `;
+                document.head.appendChild(style);
+                document.body.appendChild(glow);
+
+                setTimeout(() => {
+                    glow.remove();
+                    style.remove();
+                }, 400);
+
+                spawnConfetti(clickX, clickY);
+            });
+        })();
     </script>
 
 </body>
